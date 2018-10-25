@@ -58,6 +58,9 @@
                 enterKey = 13;
             var maxEnterCount = 30;
             var lineCount = 0;
+            
+            $("#targetTextArea").focus();
+            
             $(document).keydown(function(e) {
                 if (e.keyCode == ctrlKey || e.keyCode == cmdKey) ctrlDown = true;
             }).keyup(function(e) {

@@ -66,25 +66,25 @@
                 e.preventDefault();
             });
             $('textarea').keydown(function(e) {
-                
-                
+
+
                 lineCount = (wordWrap($(this).val(), 24).match(new RegExp("\n", "g")) || []).length;
                 console.log("lineCount " + lineCount);
-                
-                var allowed = [8,46,37,38,39,40]
+
+                var allowed = [8, 46, 37, 38, 39, 40]
                 if (!allowed.includes(e.keyCode) && lineCount >= 30) {
                     return false;
                 }
-                
-                
+
+
                 if (ctrlDown && (e.keyCode == vKey || e.keyCode == cKey)) return false;
             }).keypress(function(e) {
-//                if (e.keyCode == enterKey) {
-//                    lineCount = $(this).val().split('\n').length;
-//                    if (lineCount == maxEnterCount) {
-//                        return false;
-//                    }
-//                }
+                //                if (e.keyCode == enterKey) {
+                //                    lineCount = $(this).val().split('\n').length;
+                //                    if (lineCount == maxEnterCount) {
+                //                        return false;
+                //                    }
+                //                }
             });
         });
 
@@ -97,59 +97,63 @@
             var cleanTextArea = textArea.replace(/<br>/g, "\n");
 
             var wrapped = wordWrap(cleanTextArea, 24);
+            var length = wrapped.replace(/\s/g, "").length;
+            if (length > 0) {
 
 
-            console.log(wrapped);
+                console.log("len is "+length);
 
 
-            var builder = new StarWebPrintBuilder();
+                var builder = new StarWebPrintBuilder();
 
-            var request = '';
+                var request = '';
 
-            request += builder.createInitializationElement();
+                request += builder.createInitializationElement();
 
-            request += builder.createTextElement({
-                characterspace: 0,
-                width: 2,
-                height: 2
-            });
+                request += builder.createTextElement({
+                    characterspace: 0,
+                    width: 2,
+                    height: 2
+                });
 
-            request += builder.createAlignmentElement({
-                position: 'left'
-            });
-            var newLine = "\n"
-            request += builder.createTextElement({
-                data: newLine.repeat(7)
-            });
-            request += builder.createTextElement({
-                data: wrapped
-            });
-            request += builder.createCutPaperElement({
-                feed: true
-            });
+                request += builder.createAlignmentElement({
+                    position: 'left'
+                });
+                var newLine = "\n"
+                request += builder.createTextElement({
+                    data: newLine.repeat(7)
+                });
+                request += builder.createTextElement({
+                    data: wrapped
+                });
+                request += builder.createCutPaperElement({
+                    feed: true
+                });
 
-            var url = "https://localhost:8001/StarWebPRNT/SendMessage";
-            var papertype = "normal";
-            var trader = new StarWebPrintTrader({
-                url: url,
-                papertype: papertype
-            });
+                var url = "https://localhost:8001/StarWebPRNT/SendMessage";
+                var papertype = "normal";
+                var trader = new StarWebPrintTrader({
+                    url: url,
+                    papertype: papertype
+                });
 
-            //            trader.onReceive = function(response) {
-            //                alert(response.responseText);
-            //            }
-            trader.onError = function(response) {
-                alert(response.responseText);
+                trader.onReceive = function(response) {
+                    //                            alert(response.responseText);
+                    location.reload();
+                }
+                trader.onError = function(response) {
+                    alert(response.responseText);
+                    location.reload();
+                }
+                //            console.log(request);
+                trader.sendMessage({
+                    request: request
+                });
+                document.getElementById("targetTextArea").value = "";
+
+                //            setTimeout(, 4000);
+
             }
-//            console.log(request);
-            trader.sendMessage({
-                request: request
-            });
-            document.getElementById("targetTextArea").value = "";
-
-            //            setTimeout(location.reload(), 4000);
-
-
         }
 
         //        str = wordWrap(str, 40);

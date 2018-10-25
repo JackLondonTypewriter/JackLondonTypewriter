@@ -153,17 +153,18 @@
 
                 trader.onReceive = function(response) {
                     //                            alert(response.responseText);
-                    location.reload();
+//                    location.reload();
                 }
                 trader.onError = function(response) {
                     alert(response.responseText);
-                    location.reload();
+//                    location.reload();
                 }
                 //            console.log(request);
                 trader.sendMessage({
                     request: request
                 });
                 document.getElementById("targetTextArea").value = "";
+                location.reload();
 
                 //            setTimeout(, 4000);
 

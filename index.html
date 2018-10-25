@@ -74,7 +74,7 @@
 
             $(document).keydown(function(e) {
                 
-                $('textarea').attr("disabled", false).attr("placeholder", "I'm alive!").focus();
+//                $('textarea').attr("disabled", false).attr("placeholder", "I'm alive!").focus();
                 
                 
                 if (e.keyCode == ctrlKey || e.keyCode == cmdKey) ctrlDown = true;
@@ -109,6 +109,7 @@
 
 
         function print() {
+            document.getElementById("targetTextArea").focus();
 
             var textArea = String(document.getElementById('targetTextArea').value.replace(/\n/gi, '<br>'));
 
@@ -168,7 +169,7 @@
                     request: request
                 });
                 document.getElementById("targetTextArea").value = "";
-                location.reload();
+//                location.reload();
 
                 //            setTimeout(, 4000);
 

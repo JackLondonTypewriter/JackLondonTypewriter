@@ -50,9 +50,11 @@ input[type=submit] {
     text-align: center;
 }
 
+/*
 input[type=submit]:hover {
     background-color: #697f04;
 }
+*/
 
 /*
 div {

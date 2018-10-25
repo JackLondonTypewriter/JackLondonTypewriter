@@ -50,6 +50,7 @@ input[type=submit] {
     text-align: center;
 }
 
+/*
 .preventcopy {
  -webkit-touch-callout: none; 
  -webkit-user-select: none;
@@ -59,6 +60,7 @@ input[type=submit] {
  user-select: none; 
 
 }
+*/
 
 
 h1 {

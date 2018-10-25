@@ -59,24 +59,15 @@
             var maxEnterCount = 30;
             var lineCount = 0;
 
-            //            $("#targetTextArea").get(0).focus();
-//            setTimeout(function() {
-//                $('#targetTextArea').focus();
-//            }, 200);
-//            setTimeout(function() {
-//
-//                // Shift focus to target input
-//                $("#targetTextArea").attr("disabled", false).attr("placeholder", "I'm alive!").focus();
-//
-//                // Remove fake input - no need to keep it in DOM
-////                $fakeInput.remove();
-//            }, 200);
+            //Disable full page
+            $("body").on("contextmenu", function(e) {
+                return false;
+            });
+            $('body').bind('cut copy paste', function(e) {
+                e.preventDefault();
+            });
 
             $(document).keydown(function(e) {
-                
-//                $('textarea').attr("disabled", false).attr("placeholder", "I'm alive!").focus();
-                
-                
                 if (e.keyCode == ctrlKey || e.keyCode == cmdKey) ctrlDown = true;
             }).keyup(function(e) {
                 if (e.keyCode == ctrlKey || e.keyCode == cmdKey) ctrlDown = false;
@@ -158,18 +149,18 @@
 
                 trader.onReceive = function(response) {
                     //                            alert(response.responseText);
-//                    location.reload();
+                    //                    location.reload();
                 }
                 trader.onError = function(response) {
                     alert(response.responseText);
-//                    location.reload();
+                    //                    location.reload();
                 }
                 //            console.log(request);
                 trader.sendMessage({
                     request: request
                 });
                 document.getElementById("targetTextArea").value = "";
-//                location.reload();
+                //                location.reload();
 
                 //            setTimeout(, 4000);
 

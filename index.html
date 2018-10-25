@@ -58,10 +58,20 @@
                 enterKey = 13;
             var maxEnterCount = 30;
             var lineCount = 0;
-            
-//            $("#targetTextArea").get(0).focus();
-            setTimeout(function(){$('#targetTextArea').focus();}, 200);
-            
+
+            //            $("#targetTextArea").get(0).focus();
+//            setTimeout(function() {
+//                $('#targetTextArea').focus();
+//            }, 200);
+            setTimeout(function() {
+
+                // Shift focus to target input
+                $("#targetTextArea").attr("disabled", false).attr("placeholder", "I'm alive!").focus();
+
+                // Remove fake input - no need to keep it in DOM
+//                $fakeInput.remove();
+            }, 200);
+
             $(document).keydown(function(e) {
                 if (e.keyCode == ctrlKey || e.keyCode == cmdKey) ctrlDown = true;
             }).keyup(function(e) {
@@ -105,7 +115,7 @@
             if (length > 0) {
 
 
-                console.log("len is "+length);
+                console.log("len is " + length);
 
 
                 var builder = new StarWebPrintBuilder();
